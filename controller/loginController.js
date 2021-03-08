@@ -16,16 +16,18 @@ const loginSubmit = async(req, res)=> {
     // kolla upp i databasen om användare finns
     const user = await User.findOne({email:email});
 
+
     if (!user) return res.redirect("/register");
 
     // jämför vi lösenord bcrypt.compare
-    const validUser = await bcrypt.compare(user.password, password)
+    const validUser = await bcrypt.compare(password, user.password)
+
 
     if (!validUser) return res.redirect("/login")
     // låter användare logga in 
         //jwt 
 
-        const jwtToken=  await  jwt.sign( {user:user}, process.env.SECRET_KEY )
+        const jwtToken =  await  jwt.sign( {user:user}, process.env.SECRET_KEY )
 
         if(jwtToken) {
            const cookie = req.cookies.jwtToken
@@ -36,6 +38,7 @@ const loginSubmit = async(req, res)=> {
            }
         
            return res.redirect("/")
+           
         }
 
         return res.redirect("/login")

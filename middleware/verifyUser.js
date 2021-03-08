@@ -1,22 +1,20 @@
-// verify token
+// verify Token 
 
 const jwt = require("jsonwebtoken");
-
 require("dotenv").config();
 
 const verifyToken = (req, res, next)=>{
-
     const token = req.cookies.jwtToken;
+    if(!token ) return res.render("login.ejs", {err:"Du måste logga in"})
+  const validUser =   jwt.verify(token, process.env.SECRET_KEY)
+  
+  // läser in den här token data , lägger till token datan i req objektet. 
+  //
+  if(validUser) {
+    req.user = validUser;
+  }
 
-    if(!token) return res.render("login.ejs", {err:"du måste logga in"})
-
-    const validUser = jwt.verify(token, process.env.SECRET_KEY)
-
-    if(validUser) {
-        req.user = validUser;
-    }
-
-    next();
+  next();
 }
 
 module.exports = verifyToken;
