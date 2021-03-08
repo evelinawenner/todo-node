@@ -4,20 +4,24 @@
     box-sizing: border-box;
     }
     body {
-    background: #e0b4a0;
+    background: #8f7365;
     }
     .todo-container {
-    color: white;
+
+    border-style: dotted;
+    border-width: thick;
+    border-color: black;
+    color: #4d3d36;
     position: absolute;
     top:50%;
     left: 50%;
     padding: 20px;
-    width: 600px;
+    width: 450px;
     transform: translate(-50%,-50%);
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     }
     .todo {
     width: 400px;
@@ -52,7 +56,7 @@
     border: none;
     border-radius: 5px;
     font-family: 'Candal', sans-serif;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.082);
     display: flex;
     flex-direction: row;
     }
